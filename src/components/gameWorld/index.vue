@@ -32,9 +32,6 @@ export default {
       reRenderOffset: 99.0
     }
   },
-  methods: {
-
-  },
   mounted() {
     setInterval(() => {
       this.ssgr1.leftPos = Math.round((this.ssgr1.leftPos - this.velocity) * 100) / 100
@@ -54,7 +51,7 @@ export default {
 <style>
 .ss-game-world-container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;

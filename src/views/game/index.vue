@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 800px; height: 400px; position: relative; display: inline-block;">
     <game-world />
   </div>
 </template>
