@@ -26,16 +26,27 @@ import engineAsset4 from '@/assets/player/Engine_fire-1_04.gif'
 export default {
   name: 'Player',
   props: {
-    initialTop: 0,
-    initialLeft: 0
+    initialTop: {
+      type: Number,
+      default: 50
+    },
+    initialLeft: {
+      type: Number,
+      default: 50
+    },
+    scene: {
+      required: true
+    }
   },
   data() {
     return {
       playerAssets: [asset1, asset2, asset3, asset4, asset5, asset6],
       engineAssets: [engineAsset1, engineAsset2, engineAsset3, engineAsset4],
-      top: null,
-      left: null,
+      top: this.initialTop,
+      left: this.initialLeft,
       velocity: 2,
+      playerWidth: 55,
+      playerHeight: 36,
       codesets: {
         top: false,
         bottom: false,
@@ -50,38 +61,54 @@ export default {
     },
     leftPos() {
       return this.left ? this.left : this.initialLeft
-    }
+    },
   },
   methods: {
     goUp() {
-      this.top -= this.velocity
-      this.$refs.ssplayer.style.top = this.topPos + 'px';
+      if (this.top - this.velocity - 5 > 0) {
+        this.top -= this.velocity
+        this.$refs.ssplayer.style.top = this.topPos + 'px'
+      }
     },
     goDown() {
-      this.top += this.velocity
-      this.$refs.ssplayer.style.top = this.topPos + 'px';
+      if (this.top + this.velocity + this.playerHeight + 5 < this.scene.clientHeight) {
+        this.top += this.velocity
+        this.$refs.ssplayer.style.top = this.topPos + 'px'
+      }
     },
     goLeft() {
-      this.left -= this.velocity
-      this.$refs.ssplayer.style.left = this.leftPos + 'px';
+      if (this.left - this.velocity - 15 > 0) {
+        this.left -= this.velocity
+        this.$refs.ssplayer.style.left = this.leftPos + 'px'
+      }
     },
     goRight() {
-      this.left += this.velocity
-      this.$refs.ssplayer.style.left = this.leftPos + 'px';
+      if (this.left + this.velocity + this.playerWidth + 5 < this.scene.clientWidth) {
+        this.left += this.velocity
+        this.$refs.ssplayer.style.left = this.leftPos + 'px'
+      }
     }
   },
   mounted() {
-    document.addEventListener('keydown', (event) => {
+    this.$refs.ssplayer.style.left = this.left + 'px'
+    this.$refs.ssplayer.style.top = this.top + 'px'
+    document.addEventListener('keydown', event => {
       if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = true
-      if (event.key == 's' || event.key == 'ArrowDown') this.codesets.bottom = true
-      if (event.key == 'a' || event.key == 'ArrowLeft') this.codesets.left = true
-      if (event.key == 'd' || event.key == 'ArrowRight') this.codesets.right = true
+      if (event.key == 's' || event.key == 'ArrowDown')
+        this.codesets.bottom = true
+      if (event.key == 'a' || event.key == 'ArrowLeft')
+        this.codesets.left = true
+      if (event.key == 'd' || event.key == 'ArrowRight')
+        this.codesets.right = true
     })
-    document.addEventListener('keyup', (event) => {
+    document.addEventListener('keyup', event => {
       if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = false
-      if (event.key == 's' || event.key == 'ArrowDown') this.codesets.bottom = false
-      if (event.key == 'a' || event.key == 'ArrowLeft') this.codesets.left = false
-      if (event.key == 'd' || event.key == 'ArrowRight') this.codesets.right = false
+      if (event.key == 's' || event.key == 'ArrowDown')
+        this.codesets.bottom = false
+      if (event.key == 'a' || event.key == 'ArrowLeft')
+        this.codesets.left = false
+      if (event.key == 'd' || event.key == 'ArrowRight')
+        this.codesets.right = false
     })
     setInterval(() => {
       if (this.codesets.top) this.goUp()

@@ -1,7 +1,7 @@
 <template>
-  <div style="width: 800px; height: 400px; position: relative; display: inline-block;">
+  <div ref="gameScene" class="ss-game-view">
     <game-world />
-    <player />
+    <player :scene="gameScene" />
   </div>
 </template>
 
@@ -14,10 +14,23 @@ export default {
   components: {
     GameWorld,
     Player
+  },
+  data() {
+    return {
+      gameScene: null
+    }
+  },
+  mounted() {
+    this.gameScene = this.$refs.gameScene
   }
 }
 </script>
 
 <style>
-
+.ss-game-view {
+  width: 800px;
+  height: 400px;
+  position: relative;
+  display: inline-block;
+}
 </style>
