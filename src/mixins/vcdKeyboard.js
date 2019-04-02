@@ -5,7 +5,6 @@ export default {
     ...mapActions(['KEY_DOWNS_ADD_KEY', 'KEY_DOWNS_REMOVE_KEY'])
   },
   mounted() {
-    console.log('sss')
     document.addEventListener('keydown', event => {
       this.KEY_DOWNS_ADD_KEY(event.keyCode)
     })
