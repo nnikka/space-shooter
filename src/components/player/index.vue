@@ -7,6 +7,7 @@
       <div class="ss-player-body">
         <ss-animate :assets="playerAssets" />
       </div>
+      <shoot />
     </div>
   </div>
 </template>
@@ -22,6 +23,7 @@ import engineAsset1 from '@/assets/player/Engine_fire-1_01.gif'
 import engineAsset2 from '@/assets/player/Engine_fire-1_02.gif'
 import engineAsset3 from '@/assets/player/Engine_fire-1_03.png'
 import engineAsset4 from '@/assets/player/Engine_fire-1_04.gif'
+import Shoot from './shoot'
 
 export default {
   name: 'Player',
@@ -37,6 +39,9 @@ export default {
     scene: {
       required: true
     }
+  },
+  components: {
+    Shoot
   },
   data() {
     return {
