@@ -5,7 +5,10 @@
 </template>
 
 <script>
+import VCDKeyboardMixin from '@/mixins/vcdKeyboard'
+
 export default {
-  name: 'App'
+  name: 'App',
+  mixins: [VCDKeyboardMixin]
 }
 </script>

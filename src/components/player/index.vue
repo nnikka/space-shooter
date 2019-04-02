@@ -97,24 +97,24 @@ export default {
   mounted() {
     this.$refs.ssplayer.style.left = this.left + 'px'
     this.$refs.ssplayer.style.top = this.top + 'px'
-    document.addEventListener('keydown', event => {
-      if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = true
-      if (event.key == 's' || event.key == 'ArrowDown')
-        this.codesets.bottom = true
-      if (event.key == 'a' || event.key == 'ArrowLeft')
-        this.codesets.left = true
-      if (event.key == 'd' || event.key == 'ArrowRight')
-        this.codesets.right = true
-    })
-    document.addEventListener('keyup', event => {
-      if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = false
-      if (event.key == 's' || event.key == 'ArrowDown')
-        this.codesets.bottom = false
-      if (event.key == 'a' || event.key == 'ArrowLeft')
-        this.codesets.left = false
-      if (event.key == 'd' || event.key == 'ArrowRight')
-        this.codesets.right = false
-    })
+    // document.addEventListener('keydown', event => {
+    //   if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = true
+    //   if (event.key == 's' || event.key == 'ArrowDown')
+    //     this.codesets.bottom = true
+    //   if (event.key == 'a' || event.key == 'ArrowLeft')
+    //     this.codesets.left = true
+    //   if (event.key == 'd' || event.key == 'ArrowRight')
+    //     this.codesets.right = true
+    // })
+    // document.addEventListener('keyup', event => {
+    //   if (event.key == 'w' || event.key == 'ArrowUp') this.codesets.top = false
+    //   if (event.key == 's' || event.key == 'ArrowDown')
+    //     this.codesets.bottom = false
+    //   if (event.key == 'a' || event.key == 'ArrowLeft')
+    //     this.codesets.left = false
+    //   if (event.key == 'd' || event.key == 'ArrowRight')
+    //     this.codesets.right = false
+    // })
     setInterval(() => {
       if (this.codesets.top) this.goUp()
       if (this.codesets.bottom) this.goDown()
