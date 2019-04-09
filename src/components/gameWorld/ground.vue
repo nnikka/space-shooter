@@ -47,7 +47,7 @@ export default {
 .ss-game-world-grass-container .ss-bush {
   width: 100%;
   height: auto;
-  margin-bottom: -4.5%;
+  margin-bottom: -5.5%;
   position: relative;
   z-index: 100;
 }
@@ -55,5 +55,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
+  left: 0;
+  top: 0;
 }
 </style>

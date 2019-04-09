@@ -16,7 +16,7 @@ export default {
 <style>
 .ss-game-buildings-container {
   position: relative;
-  margin-bottom: -7%;
+  margin-bottom: -8.5%;
   z-index: 90;
 }
 .ss-game-buildings-container img {
