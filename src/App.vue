@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <component :is="computedLayout">
+      <router-view/>
+    </component>
   </div>
 </template>
 
@@ -9,6 +11,15 @@ import VCDKeyboardMixin from '@/mixins/vcdKeyboard'
 
 export default {
   name: 'App',
-  mixins: [VCDKeyboardMixin]
+  mixins: [VCDKeyboardMixin],
+  computed: {
+    computedLayout() {
+      return (
+        'ss-' +
+        (this.$route.meta.layout || this.defaultLayout || 'default') +
+        '-layout'
+      )
+    }
+  }
 }
 </script>
