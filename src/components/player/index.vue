@@ -50,9 +50,10 @@ export default {
       engineAssets: [engineAsset1, engineAsset2, engineAsset3, engineAsset4],
       top: this.initialTop,
       left: this.initialLeft,
-      velocity: 2,
       playerWidth: 55,
-      playerHeight: 36
+      playerHeight: 36,
+
+      velocity: 2,
     }
   },
   computed: {

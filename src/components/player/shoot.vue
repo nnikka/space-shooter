@@ -6,11 +6,7 @@
 export default {
   name: 'PlayerShoot',
   mounted() {
-    document.addEventListener('keydown', event => {
-      if (event.keyCode == 32) {
-        console.log('shoot')
-      }
-    })
+
   }
 }
 </script>
