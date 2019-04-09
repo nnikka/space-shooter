@@ -21,9 +21,7 @@ export default {
     }
   },
   mounted() {
-    // setInterval(() => {
-    //   this.$refs.ssbullet.style.left += this.velocity + 'px'
-    // }, 10)
+
   }
 }
 </script>

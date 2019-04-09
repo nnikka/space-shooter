@@ -24,6 +24,7 @@ import engineAsset2 from '@/assets/player/Engine_fire-1_02.gif'
 import engineAsset3 from '@/assets/player/Engine_fire-1_03.png'
 import engineAsset4 from '@/assets/player/Engine_fire-1_04.gif'
 import Shoot from './shoot'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Player',
@@ -51,16 +52,26 @@ export default {
       left: this.initialLeft,
       velocity: 2,
       playerWidth: 55,
-      playerHeight: 36,
+      playerHeight: 36
     }
   },
   computed: {
+    ...mapGetters([
+      'KEY_DOWNS_GET_ACTIVE_W',
+      'KEY_DOWNS_GET_ACTIVE_A',
+      'KEY_DOWNS_GET_ACTIVE_S',
+      'KEY_DOWNS_GET_ACTIVE_D',
+      'KEY_DOWNS_GET_ACTIVE_ARROWUP',
+      'KEY_DOWNS_GET_ACTIVE_ARROWDOWN',
+      'KEY_DOWNS_GET_ACTIVE_ARROWLEFT',
+      'KEY_DOWNS_GET_ACTIVE_ARROWRIGHT'
+    ]),
     topPos() {
       return this.top ? this.top : this.initialTop
     },
     leftPos() {
       return this.left ? this.left : this.initialLeft
-    },
+    }
   },
   methods: {
     goUp() {
@@ -70,7 +81,10 @@ export default {
       }
     },
     goDown() {
-      if (this.top + this.velocity + this.playerHeight + 5 < this.scene.clientHeight) {
+      if (
+        this.top + this.velocity + this.playerHeight + 5 <
+        this.scene.clientHeight
+      ) {
         this.top += this.velocity
         this.$refs.ssplayer.style.top = this.topPos + 'px'
       }
@@ -82,18 +96,25 @@ export default {
       }
     },
     goRight() {
-      if (this.left + this.velocity + this.playerWidth + 5 < this.scene.clientWidth) {
+      if (
+        this.left + this.velocity + this.playerWidth + 5 <
+        this.scene.clientWidth
+      ) {
         this.left += this.velocity
         this.$refs.ssplayer.style.left = this.leftPos + 'px'
       }
     }
   },
-  mounted() {
+  async mounted() {
     this.$refs.ssplayer.style.left = this.left + 'px'
     this.$refs.ssplayer.style.top = this.top + 'px'
-    setInterval(() => {
-
-    }, 10)
+    while (true) {
+      if (this.KEY_DOWNS_GET_ACTIVE_W || this.KEY_DOWNS_GET_ACTIVE_ARROWUP) this.goUp()
+      if (this.KEY_DOWNS_GET_ACTIVE_S || this.KEY_DOWNS_GET_ACTIVE_ARROWDOWN) this.goDown()
+      if (this.KEY_DOWNS_GET_ACTIVE_D || this.KEY_DOWNS_GET_ACTIVE_ARROWRIGHT) this.goRight()
+      if (this.KEY_DOWNS_GET_ACTIVE_A || this.KEY_DOWNS_GET_ACTIVE_ARROWLEFT) this.goLeft()
+      await this.$sleep(10)
+    }
   }
 }
 </script>

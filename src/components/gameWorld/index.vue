@@ -12,7 +12,7 @@
 import Ground from './ground'
 
 export default {
-  name: 'GameWold',
+  name: 'GameWorld',
   components: {
     Ground
   },
@@ -32,8 +32,8 @@ export default {
       reRenderOffset: 99.0
     }
   },
-  mounted() {
-    setInterval(() => {
+  async mounted() {
+    while (true) {
       this.ssgr1.leftPos = Math.round((this.ssgr1.leftPos - this.velocity) * 100) / 100
       this.ssgr2.leftPos = Math.round((this.ssgr2.leftPos - this.velocity) * 100) / 100
       this.ssgr3.leftPos = Math.round((this.ssgr3.leftPos - this.velocity) * 100) / 100
@@ -43,7 +43,8 @@ export default {
       if (this.ssgr1.leftPos == this.reRenderPos) this.ssgr1.leftPos += this.reRenderOffset
       if (this.ssgr2.leftPos == this.reRenderPos) this.ssgr2.leftPos += this.reRenderOffset
       if (this.ssgr3.leftPos == this.reRenderPos) this.ssgr3.leftPos += this.reRenderOffset
-    }, 10)
+      await this.$sleep()
+    }
   }
 }
 </script>

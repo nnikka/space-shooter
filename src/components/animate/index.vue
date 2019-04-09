@@ -21,13 +21,14 @@ export default {
       counter: 0
     }
   },
-  mounted() {
+  async mounted() {
     this.src = this.assets[this.counter]
-    setInterval(() => {
+    while (true) {
       this.src = this.assets[this.counter]
       this.counter++
       if (this.counter == this.assets.length) this.counter = 0
-    }, this.delay)
+      await this.$sleep(this.delay)
+    }
   }
 }
 </script>
