@@ -52,8 +52,6 @@ export default {
       left: this.initialLeft,
       playerWidth: 55,
       playerHeight: 36,
-
-      velocity: 2,
     }
   },
   computed: {
@@ -65,7 +63,8 @@ export default {
       'KEY_DOWNS_GET_ACTIVE_ARROWUP',
       'KEY_DOWNS_GET_ACTIVE_ARROWDOWN',
       'KEY_DOWNS_GET_ACTIVE_ARROWLEFT',
-      'KEY_DOWNS_GET_ACTIVE_ARROWRIGHT'
+      'KEY_DOWNS_GET_ACTIVE_ARROWRIGHT',
+      'PLAYER_GET_VELOCITY'
     ]),
     topPos() {
       return this.top ? this.top : this.initialTop
@@ -76,32 +75,32 @@ export default {
   },
   methods: {
     goUp() {
-      if (this.top - this.velocity - 5 > 0) {
-        this.top -= this.velocity
+      if (this.top - this.PLAYER_GET_VELOCITY - 5 > 0) {
+        this.top -= this.PLAYER_GET_VELOCITY
         this.$refs.ssplayer.style.top = this.topPos + 'px'
       }
     },
     goDown() {
       if (
-        this.top + this.velocity + this.playerHeight + 5 <
+        this.top + this.PLAYER_GET_VELOCITY + this.playerHeight + 5 <
         this.scene.clientHeight
       ) {
-        this.top += this.velocity
+        this.top += this.PLAYER_GET_VELOCITY
         this.$refs.ssplayer.style.top = this.topPos + 'px'
       }
     },
     goLeft() {
-      if (this.left - this.velocity - 15 > 0) {
-        this.left -= this.velocity
+      if (this.left - this.PLAYER_GET_VELOCITY - 15 > 0) {
+        this.left -= this.PLAYER_GET_VELOCITY
         this.$refs.ssplayer.style.left = this.leftPos + 'px'
       }
     },
     goRight() {
       if (
-        this.left + this.velocity + this.playerWidth + 5 <
+        this.left + this.PLAYER_GET_VELOCITY + this.playerWidth + 5 <
         this.scene.clientWidth
       ) {
-        this.left += this.velocity
+        this.left += this.PLAYER_GET_VELOCITY
         this.$refs.ssplayer.style.left = this.leftPos + 'px'
       }
     }
