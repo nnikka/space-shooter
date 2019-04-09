@@ -7,7 +7,7 @@
       <div class="ss-player-body">
         <ss-animate :assets="playerAssets" />
       </div>
-      <shoot />
+      <shoot :scene="scene" :shootingRate="PLAYER_GET_SHOOTINGRATE" :clickShoot="clickShoot" :bullet="bullet" :bulletVelocity="PLAYER_GET_BULLETVELOCITY" />
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ import engineAsset2 from '@/assets/player/Engine_fire-1_02.gif'
 import engineAsset3 from '@/assets/player/Engine_fire-1_03.png'
 import engineAsset4 from '@/assets/player/Engine_fire-1_04.gif'
 import Shoot from './shoot'
+import Bullet from '@/components/bullet'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -52,6 +53,7 @@ export default {
       left: this.initialLeft,
       playerWidth: 55,
       playerHeight: 36,
+      bullet: Bullet
     }
   },
   computed: {
@@ -64,13 +66,19 @@ export default {
       'KEY_DOWNS_GET_ACTIVE_ARROWDOWN',
       'KEY_DOWNS_GET_ACTIVE_ARROWLEFT',
       'KEY_DOWNS_GET_ACTIVE_ARROWRIGHT',
-      'PLAYER_GET_VELOCITY'
+      'KEY_DOWNS_GET_ACTIVE_SPACE',
+      'PLAYER_GET_VELOCITY',
+      'PLAYER_GET_SHOOTINGRATE',
+      'PLAYER_GET_BULLETVELOCITY'
     ]),
     topPos() {
       return this.top ? this.top : this.initialTop
     },
     leftPos() {
       return this.left ? this.left : this.initialLeft
+    },
+    clickShoot() {
+      return this.KEY_DOWNS_GET_ACTIVE_SPACE
     }
   },
   methods: {
@@ -109,10 +117,14 @@ export default {
     this.$refs.ssplayer.style.left = this.left + 'px'
     this.$refs.ssplayer.style.top = this.top + 'px'
     while (true) {
-      if (this.KEY_DOWNS_GET_ACTIVE_W || this.KEY_DOWNS_GET_ACTIVE_ARROWUP) this.goUp()
-      if (this.KEY_DOWNS_GET_ACTIVE_S || this.KEY_DOWNS_GET_ACTIVE_ARROWDOWN) this.goDown()
-      if (this.KEY_DOWNS_GET_ACTIVE_D || this.KEY_DOWNS_GET_ACTIVE_ARROWRIGHT) this.goRight()
-      if (this.KEY_DOWNS_GET_ACTIVE_A || this.KEY_DOWNS_GET_ACTIVE_ARROWLEFT) this.goLeft()
+      if (this.KEY_DOWNS_GET_ACTIVE_W || this.KEY_DOWNS_GET_ACTIVE_ARROWUP)
+        this.goUp()
+      if (this.KEY_DOWNS_GET_ACTIVE_S || this.KEY_DOWNS_GET_ACTIVE_ARROWDOWN)
+        this.goDown()
+      if (this.KEY_DOWNS_GET_ACTIVE_D || this.KEY_DOWNS_GET_ACTIVE_ARROWRIGHT)
+        this.goRight()
+      if (this.KEY_DOWNS_GET_ACTIVE_A || this.KEY_DOWNS_GET_ACTIVE_ARROWLEFT)
+        this.goLeft()
       await this.$sleep(10)
     }
   }

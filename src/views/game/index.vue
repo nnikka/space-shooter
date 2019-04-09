@@ -32,5 +32,6 @@ export default {
   height: 400px;
   position: relative;
   display: inline-block;
+  overflow: hidden;
 }
 </style>

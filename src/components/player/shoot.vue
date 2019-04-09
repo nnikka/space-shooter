@@ -1,12 +1,68 @@
 <template>
-  <div class="ss-player-lull"></div>
+  <div ref="bulletContainer" class="ss-player-lull">
+
+  </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import BulletAsset from '@/assets/Bullets/Bullet2.png'
+
 export default {
   name: 'PlayerShoot',
-  mounted() {
-
+  props: {
+    scene: {
+      required: true
+    },
+    shootingRate: {
+      required: true,
+      type: Number
+    },
+    clickShoot: {
+      required: true,
+      type: Boolean
+    },
+    bulletVelocity: {
+      required: true
+    },
+    bullet: {
+      required: true
+    }
+  },
+  data() {
+    return {
+      lastShootTime: Date.now()
+    }
+  },
+  methods: {
+    shoot() {
+      let ComponentClass = Vue.extend(this.bullet)
+      let leftPos = this.$refs.bulletContainer.getBoundingClientRect().left
+      let topPos = this.$refs.bulletContainer.getBoundingClientRect().top
+      console.log(this.$refs.bulletContainer.getBoundingClientRect())
+      let instance = new ComponentClass({
+        propsData: {
+          bulletAsset: BulletAsset,
+          velocity: this.bulletVelocity,
+          leftPos: leftPos,
+          topPos: topPos
+        }
+      })
+      instance.$mount()
+      this.scene.appendChild(instance.$el)
+      // instance.$el.style.left = leftPos + 'px'
+      // instance.$el.style.top = topPos + 'px'
+      // instance.$el.getBoundingClientRect().left = this.$refs.bulletContainer.getBoundingClientRect().left
+      // instance.$el.getBoundingClientRect().right = this.$refs.bulletContainer.getBoundingClientRect().right
+    }
+  },
+  async mounted() {
+    while (true) {
+      if (this.clickShoot) {
+        this.shoot()
+      }
+      await this.$sleep(this.shootingRate)
+    }
   }
 }
 </script>

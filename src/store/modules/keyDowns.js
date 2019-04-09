@@ -27,6 +27,9 @@ const getters = {
   KEY_DOWNS_GET_ACTIVE_ARROWRIGHT(state) {
     return state.activeKeys.includes(39)
   },
+  KEY_DOWNS_GET_ACTIVE_SPACE(state) {
+    return state.activeKeys.includes(32)
+  },
 }
 
 const actions = {

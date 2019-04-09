@@ -1,11 +1,19 @@
 const state = {
   velocity: 2,
   score: 0,
+  shootingRate: 500,
+  bulletVelocity: 12
 }
 
 const getters = {
   PLAYER_GET_VELOCITY(state) {
     return state.velocity
+  },
+  PLAYER_GET_SHOOTINGRATE(state) {
+    return state.shootingRate
+  },
+  PLAYER_GET_BULLETVELOCITY(state) {
+    return state.bulletVelocity
   }
 }
 
