@@ -8,6 +8,7 @@
 <script>
 import GameWorld from '@/components/gameWorld'
 import Player from '@/components/player'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'gameScene',
@@ -24,6 +25,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['GAMESCENE_SET_POSITION']),
     recalculateSceneHeight() {
       this.width = this.$refs.gameScene.getBoundingClientRect().width
       this.height = this.$refs.gameScene.getBoundingClientRect().width / 16 * 9
@@ -39,6 +41,11 @@ export default {
   },
   watch: {
     windowWidth(newVal, oldVal) {
+      let payload = {
+        top: this.$refs.gameScene.getBoundingClientRect().top,
+        left: this.$refs.gameScene.getBoundingClientRect().left
+      }
+      this.GAMESCENE_SET_POSITION(payload)
       this.recalculateSceneHeight()
     }
   }

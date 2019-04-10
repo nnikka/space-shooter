@@ -7,6 +7,7 @@
 <script>
 import Vue from 'vue'
 import BulletAsset from '@/assets/Bullets/Bullet2.png'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PlayerShoot',
@@ -34,6 +35,9 @@ export default {
       lastShootTime: Date.now()
     }
   },
+  computed: {
+    ...mapGetters(['GAMESCENE_GET_POSITION'])
+  },
   methods: {
     shoot() {
       let ComponentClass = Vue.extend(this.bullet)
@@ -44,8 +48,8 @@ export default {
         propsData: {
           bulletAsset: BulletAsset,
           velocity: this.bulletVelocity,
-          leftPos: leftPos,
-          topPos: topPos
+          leftPos: leftPos - this.GAMESCENE_GET_POSITION.left,
+          topPos: topPos - this.GAMESCENE_GET_POSITION.top
         }
       })
       instance.$mount()

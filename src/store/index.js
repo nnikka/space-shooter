@@ -5,6 +5,7 @@ import keyDowns from './modules/keyDowns'
 import game from './modules/game'
 import player from './modules/player'
 import enemy from './modules/enemy'
+import gameScene from './modules/gameScene'
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     keyDowns,
     game,
     player,
-    enemy
+    enemy,
+    gameScene
   }
 })
